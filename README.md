@@ -2,6 +2,12 @@
 
 A full-featured Hotel Management application built with the MERN stack (MongoDB, Express, React, Node.js). This platform allows users to browse hotels, view dynamic details and map locations, seamlessly book rooms with integrated payments, and even interact with an AI-powered customer support chatbot. It also includes a comprehensive Admin Dashboard to manage hotels, view statistics, and monitor bookings.
 
+## Live Demo
+
+Frontend: https://hotel-management-system-dun-one.vercel.app
+
+Backend API: https://hotel-management-system-8xz6.onrender.com
+
 ## 🌟 Key Features
 
 * **User Authentication**: Secure Login and Registration system with Email OTP verification and Google OAuth integration.
