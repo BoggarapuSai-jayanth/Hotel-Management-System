@@ -9,28 +9,26 @@ const filesToUpdate = [
     'frontend/src/pages/AdminLogin.jsx',
     'frontend/src/pages/AdminDashboard.jsx',
     'frontend/src/components/Navbar.jsx',
-    'frontend/src/components/Chatbot.jsx',
-    'backend/.env',
-    'backend/server.js'
+    'frontend/src/components/Chatbot.jsx'
 ];
 
-const basePath = __dirname; // Assuming script is in root
+const basePath = __dirname;
 
 let modifiedCount = 0;
 
 filesToUpdate.forEach(relativePath => {
     const filePath = path.join(basePath, relativePath);
+
     if (fs.existsSync(filePath)) {
         let content = fs.readFileSync(filePath, 'utf8');
-        
+
         let newContent = content;
-        if (relativePath.includes('frontend')) {
-            newContent = content.replace(/http:\/\/localhost:5000/g, 'http://localhost:5001');
-        } else if (relativePath === 'backend/.env') {
-            newContent = content.replace(/PORT=5000/g, 'PORT=5001');
-        } else if (relativePath === 'backend/server.js') {
-            newContent = content.replace(/\|\| 5000/g, '|| 5001');
-        }
+
+        // Replace localhost URLs
+        newContent = newContent.replace(
+            /http:\/\/localhost:5000/g,
+            '${import.meta.env.VITE_API_URL}'
+        );
 
         if (content !== newContent) {
             fs.writeFileSync(filePath, newContent, 'utf8');
