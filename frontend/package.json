@@ -13,6 +13,7 @@
     "@react-google-maps/api": "^2.19.3",
     "@react-oauth/google": "^0.13.4",
     "axios": "^1.6.2",
+    "esbuild": "^0.28.0",
     "framer-motion": "^12.34.3",
     "leaflet": "^1.9.4",
     "lucide-react": "^0.300.0",
