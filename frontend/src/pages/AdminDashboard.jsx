@@ -42,7 +42,7 @@ const AdminDashboard = () => {
 
         const fetchStats = async () => {
             try {
-                const res = await axios.get('http://localhost:5001/api/admin/stats', {
+                const res = await axios.get(`${import.meta.env.VITE_API_URL || 'http://localhost:5001'}/api/admin/stats`, {
                     headers: { Authorization: `Bearer ${storedToken}` }
                 });
                 setStats(res.data);
@@ -94,7 +94,7 @@ const AdminDashboard = () => {
                 }]
             };
 
-            await axios.post('http://localhost:5001/api/hotels', newHotel, {
+            await axios.post(`${import.meta.env.VITE_API_URL || 'http://localhost:5001'}/api/hotels`, newHotel, {
                 headers: { Authorization: `Bearer ${token}` }
             });
             setSuccessMsg(`Hotel "${formData.name}" officially registered!`);
@@ -104,7 +104,7 @@ const AdminDashboard = () => {
 
             // Refresh stats to include new hotel
             try {
-                const res = await axios.get('http://localhost:5001/api/admin/stats', {
+                const res = await axios.get(`${import.meta.env.VITE_API_URL || 'http://localhost:5001'}/api/admin/stats`, {
                     headers: { Authorization: `Bearer ${token}` }
                 });
                 setStats(res.data);

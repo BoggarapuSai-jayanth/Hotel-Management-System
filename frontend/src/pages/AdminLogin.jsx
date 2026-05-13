@@ -14,7 +14,7 @@ const AdminLogin = () => {
         e.preventDefault();
         setError('');
         try {
-            const res = await axios.post('http://localhost:5001/api/auth/login', credentials);
+            const res = await axios.post(`${import.meta.env.VITE_API_URL || 'http://localhost:5001'}/api/auth/login`, credentials);
             if (res.data.message === 'OTP sent to email') {
                 setShowOtp(true);
             }
@@ -27,7 +27,7 @@ const AdminLogin = () => {
         e.preventDefault();
         setError('');
         try {
-            const res = await axios.post('http://localhost:5001/api/auth/verify-otp', {
+            const res = await axios.post(`${import.meta.env.VITE_API_URL || 'http://localhost:5001'}/api/auth/verify-otp`, {
                 email: credentials.email,
                 otp
             });

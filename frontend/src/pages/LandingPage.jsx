@@ -24,7 +24,7 @@ const LandingPage = () => {
 
     const handleGoogleSuccess = async (credentialResponse) => {
         try {
-            const res = await axios.post('http://localhost:5001/api/auth/google', {
+            const res = await axios.post(`${import.meta.env.VITE_API_URL || 'http://localhost:5001'}/api/auth/google`, {
                 token: credentialResponse.credential
             });
             localStorage.setItem('user', JSON.stringify(res.data));
@@ -40,7 +40,7 @@ const LandingPage = () => {
                 backendError = error.response.data?.details || error.response.data?.message || `Server Error: ${error.response.status} ${typeof error.response.data === 'string' ? error.response.data.substring(0, 50) : ''}`;
             } else if (error.request) {
                 // The request was made but no response was received (e.g., Network Error, CORS)
-                backendError = `Network Error: Could not connect to the backend server. Is it running on port 5000? Details: ${error.message}`;
+                backendError = `Network Error: Could not connect to the backend server. Please check your deployment URL or network connection. Details: ${error.message}`;
             } else {
                 // Something happened in setting up the request that triggered an Error
                 backendError = `Request Error: ${error.message}`;
@@ -55,7 +55,7 @@ const LandingPage = () => {
         setLoading(true);
         setError('');
         try {
-            await axios.post('http://localhost:5001/api/auth/login', {
+            await axios.post(`${import.meta.env.VITE_API_URL || 'http://localhost:5001'}/api/auth/login`, {
                 email: formData.email,
                 password: formData.password
             });
@@ -75,7 +75,7 @@ const LandingPage = () => {
         setLoading(true);
         setError('');
         try {
-            await axios.post('http://localhost:5001/api/auth/register', {
+            await axios.post(`${import.meta.env.VITE_API_URL || 'http://localhost:5001'}/api/auth/register`, {
                 name: formData.name,
                 email: formData.email,
                 password: formData.password
@@ -93,7 +93,7 @@ const LandingPage = () => {
         setLoading(true);
         setError('');
         try {
-            await axios.post('http://localhost:5001/api/auth/register-admin', {
+            await axios.post(`${import.meta.env.VITE_API_URL || 'http://localhost:5001'}/api/auth/register-admin`, {
                 name: formData.name,
                 email: formData.email,
                 password: formData.password
@@ -111,7 +111,7 @@ const LandingPage = () => {
         setLoading(true);
         setError('');
         try {
-            const res = await axios.post('http://localhost:5001/api/auth/verify-otp', {
+            const res = await axios.post(`${import.meta.env.VITE_API_URL || 'http://localhost:5001'}/api/auth/verify-otp`, {
                 email: formData.email,
                 otp: formData.otp
             });

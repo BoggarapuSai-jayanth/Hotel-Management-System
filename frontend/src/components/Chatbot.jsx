@@ -18,7 +18,7 @@ const Chatbot = () => {
         setLoading(true);
 
         try {
-            const res = await axios.post('http://localhost:5001/api/chat', { message: userMsg });
+            const res = await axios.post(`${import.meta.env.VITE_API_URL || 'http://localhost:5001'}/api/chat`, { message: userMsg });
             setMessages(prev => [...prev, { text: res.data.reply, sender: 'bot' }]);
         } catch (err) {
             console.log('Chat API Error:', err);

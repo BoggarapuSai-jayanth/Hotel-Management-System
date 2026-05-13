@@ -20,7 +20,7 @@ const Profile = () => {
 
     const fetchBookings = async (userId) => {
         try {
-            const res = await axios.get(`http://localhost:5001/api/bookings/user/${userId}`);
+            const res = await axios.get(`${import.meta.env.VITE_API_URL || 'http://localhost:5001'}/api/bookings/user/${userId}`);
             setBookings(res.data);
         } catch (error) {
             console.error('Error fetching bookings:', error);

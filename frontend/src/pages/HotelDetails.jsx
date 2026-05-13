@@ -13,7 +13,7 @@ const HotelDetails = () => {
     useEffect(() => {
         const fetchHotel = async () => {
             try {
-                const res = await axios.get(`http://localhost:5001/api/hotels/${id}`);
+                const res = await axios.get(`${import.meta.env.VITE_API_URL || 'http://localhost:5001'}/api/hotels/${id}`);
                 setHotel(res.data);
             } catch (err) {
                 console.error("Failed to fetch hotel details:", err);
@@ -44,10 +44,10 @@ const HotelDetails = () => {
                 totalAmount: room.price
             };
 
-            const res = await axios.post('http://localhost:5001/api/bookings', bookingData);
+            const res = await axios.post(`${import.meta.env.VITE_API_URL || 'http://localhost:5001'}/api/bookings`, bookingData);
             const { orderId, amount, currency, booking } = res.data;
 
-            const configRes = await axios.get('http://localhost:5001/api/config/razorpay');
+            const configRes = await axios.get(`${import.meta.env.VITE_API_URL || 'http://localhost:5001'}/api/config/razorpay`);
             const razorpayKey = configRes.data.key_id;
 
             // 2. Open Razorpay Checkout modal
@@ -61,7 +61,7 @@ const HotelDetails = () => {
                 handler: async function (response) {
                     try {
                         // 3. Verify Payment
-                        const verifyRes = await axios.post('http://localhost:5001/api/bookings/verify', {
+                        const verifyRes = await axios.post(`${import.meta.env.VITE_API_URL || 'http://localhost:5001'}/api/bookings/verify`, {
                             razorpay_order_id: response.razorpay_order_id,
                             razorpay_payment_id: response.razorpay_payment_id,
                             razorpay_signature: response.razorpay_signature,

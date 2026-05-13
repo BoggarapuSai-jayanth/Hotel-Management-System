@@ -10,7 +10,7 @@ const Navbar = () => {
 
     const handleGoogleSuccess = async (credentialResponse) => {
         try {
-            const res = await axios.post('http://localhost:5001/api/auth/google', {
+            const res = await axios.post(`${import.meta.env.VITE_API_URL || 'http://localhost:5001'}/api/auth/google`, {
                 token: credentialResponse.credential
             });
             setUser(res.data);

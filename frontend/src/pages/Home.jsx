@@ -29,7 +29,7 @@ const Home = () => {
     useEffect(() => {
         const fetchHotels = async () => {
             try {
-                const res = await axios.get('http://localhost:5001/api/hotels');
+                const res = await axios.get(`${import.meta.env.VITE_API_URL || 'http://localhost:5001'}/api/hotels`);
                 setHotels(res.data);
                 setFilteredHotels(res.data);
             } catch (err) {
